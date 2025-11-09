@@ -4,6 +4,7 @@ import HomeLayout from "../layout/HomeLayout/HomeLayout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
+import Error404 from "../Pages/Error404";
 
 
 export const router = createBrowserRouter([
@@ -23,10 +24,10 @@ export const router = createBrowserRouter([
         path: "register",
         Component:Register,
       },
-      {
-        path: "*",
-        element: <h2>error 404</h2>,
-      },
     ],
-  },
+},
+{
+  path: "*",
+  Component: Error404,
+},
 ]);
