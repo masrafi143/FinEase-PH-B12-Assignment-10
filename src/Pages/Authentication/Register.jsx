@@ -1,7 +1,6 @@
-import React, {  useState } from "react";
-// import { Link, Navigate, useLocation, useNavigate } from "react-router";
-import { Link, useNavigate } from "react-router";
-// import { AuthContext } from "../../provider/AuthProvider";
+import React, { use, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router";
+import { AuthContext } from "../../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -9,8 +8,7 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  // const { createUser, signInWithGoogle } = use(AuthContext);
-//   const {  signInWithGoogle, createUser,setPhotoUrl } = use(AuthContext);
+  const { signInWithGoogle, createUser, setPhotoUrl } = use(AuthContext);
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
@@ -18,8 +16,8 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     // const name = e.target.name.value;
-    // const photo = e.target.photo.value;
-    // setPhotoUrl(photo);
+    const photo = e.target.photo.value;
+    setPhotoUrl(photo);
     // const terms = e.target.terms.checked;
     const passwordPattern =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
@@ -32,38 +30,36 @@ const Register = () => {
     // reset status: success or error
     setError("");
     setSuccess(false);
-    // // email-pass auth
-    //   createUser(email, password)
-    //   .then((result) => {
-    //     // console.log(result.user);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     setError(error.message);
-    //   });
+    // email-pass auth
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
   };
 
-
-//   const handleGoogleSignIn = () => {
-//     signInWithGoogle()
-//       .then((result) => {
-//         // console.log(result.user);
-//         toast.success("Register Successfull !");
-//         navigate("/");
-//       })
-//       .catch((error) => {
-//         // console.log(error);
-//         setError(error.message);
-//         toast.error(error.message);
-//       });
-//   };
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        // console.log(result.user);
+        toast.success("Register Successfull !");
+        navigate("/");
+      })
+      .catch((error) => {
+        // console.log(error);
+        setError(error.message);
+        toast.error(error.message);
+      });
+  };
 
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePasswordShow = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
-
 
   return (
     <div className="flex justify-center items-center py-10 bg-base-200">
@@ -124,15 +120,13 @@ const Register = () => {
                 Accept Terms & Conditions
               </label>
               {success && (
-                <p className="text-green-500">
-                  Account created successfully
-                </p>
+                <p className="text-green-500">Account created successfully</p>
               )}
               {error && <p className="text-red-500">{error}</p>}
               <button className="btn btn-secondary text-white">Register</button>
               {/* Sign in with Google */}
               <button
-                // onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 className="btn bg-white text-black border-[#e5e5e5]"
               >
                 <svg
@@ -177,7 +171,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

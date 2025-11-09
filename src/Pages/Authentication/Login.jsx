@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { use, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 // import { AuthContext } from "../../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { ToastContainer } from "react-toastify";
-// import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../../provider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-//   const {signInWithGoogle,signInUser, forgotPassword} = use(AuthContext);
+  const {signInWithGoogle,signInUser, forgotPassword} = use(AuthContext);
   const handleLogin= (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -39,31 +39,31 @@ const Login = () => {
         setError(error.message);
     })    
   }
-//   const emailRef = useRef();
-//   const handleForgetPassword = () => {
-//     const email = emailRef.current.value;
-//     forgotPassword(email)
-//       .then(() => {
-//         alert("Please check your email to reset password.");
-//       })
-//       .catch((error) => {
-//         setError(error.message);
-//       });
-//   };
-//   const handleGoogleSignIn = () => {
-//     signInWithGoogle()
-//     .then(result=> {
-//       setSuccess(true);
-//       // console.log(result.user);
-//       toast.success("Login Successfull !");
-//       navigate(location?.state || '/');
-//     })
-//     .catch(error=> {
-//       console.log(error);
-//       setError(error.message);
-//       toast.error(error.message);
-//     })
-//   }
+  const emailRef = useRef();
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    forgotPassword(email)
+      .then(() => {
+        alert("Please check your email to reset password.");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+    .then(result=> {
+      setSuccess(true);
+    //   console.log(result.user);
+      toast.success("Login Successfull !");
+      navigate(location?.state || '/');
+    })
+    .catch(error=> {
+      console.log(error);
+      setError(error.message);
+      toast.error(error.message);
+    })
+  }
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePasswordShow = (e) => {
     e.preventDefault();
@@ -81,7 +81,7 @@ const Login = () => {
               <label className="label">Email</label>
               <input
                 name="email"
-                // ref={emailRef}
+                ref={emailRef}
                 type="email"
                 className="input text-gray-600"
                 placeholder="Email"
@@ -105,20 +105,20 @@ const Login = () => {
                 </button>
               </div>
               <div>
-                {/* <a onClick={handleForgetPassword} className="link link-hover">Forgot password?</a> */}
+                <a onClick={handleForgetPassword} className="link link-hover">Forgot password?</a>
               </div>
-                  {/* {success && (
+                  {success && (
                     <p className="text-green-500">
                       Account created successfully
                     </p>
                   )}
-                  {error && <p className="text-red-500">{error}</p>} */}
+                  {error && <p className="text-red-500">{error}</p>}
               <button className="btn btn-secondary mt-4 text-white">
                 Login
               </button>
               {/* Sign in with Google */}
               <button
-                // onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 className="btn bg-white text-black border-[#e5e5e5]"
               >
                 <svg
