@@ -7,7 +7,8 @@ import Register from "../Pages/Authentication/Register";
 import Error404 from "../Pages/Error404";
 import MyProfile from "../Pages/Profile/MyProfile";
 import AddTransaction from "../Pages/Transactions/AddTransaction";
-import MyTransaction from "../Pages/Transactions/MyTransaction";
+import MyTransactions from "../Pages/Transactions/MyTransactions";
+import TransactionDetails from "../Pages/TransactionDetails";
 
 
 export const router = createBrowserRouter([
@@ -20,12 +21,16 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: 'add-transaction',
+        path: 'add-transactions',
         Component: AddTransaction
       },
       {
-        path: 'my-transaction',
-        Component: MyTransaction
+        path: 'my-transactions',
+        Component: MyTransactions
+      },
+      {
+        path: 'my-transactions/details/:id',
+        Component: TransactionDetails
       },
       {
         path: "login",

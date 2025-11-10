@@ -41,19 +41,33 @@ const Register = () => {
       });
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithGoogle()
-      .then((result) => {
-        // console.log(result.user);
-        toast.success("Register Successfull !");
-        navigate("/");
-      })
-      .catch((error) => {
-        // console.log(error);
-        setError(error.message);
-        toast.error(error.message);
-      });
-  };
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then(result=>{
+            console.log(result.user);
+            const newUser = {
+                name: result.user.displayName,
+                email: result.user.email,
+                image: result.user.photoURL
+            }
+
+            // saving user in database
+            fetch('http://localhost:3000/users',{
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data=>{
+                console.log('after saving user, ', data);
+            })
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
 
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePasswordShow = (e) => {

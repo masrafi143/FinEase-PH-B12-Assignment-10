@@ -16,8 +16,8 @@ const Navbar = () => {
     <> 
     <div className="nav-links space-x-6 text-primary font-semibold">
       <NavLink to={"/"}>Home</NavLink>
-      <NavLink to={"/add-transaction"}>Add Transaction</NavLink>
-      <NavLink to={"/my-transaction"}>My Transaction</NavLink>
+      <NavLink to={"/add-transactions"}>Add Transaction</NavLink>
+      <NavLink to={"/my-transactions"}>My Transaction</NavLink>
       <NavLink to={"/profile"}>My Profile</NavLink>
     </div>
     </>

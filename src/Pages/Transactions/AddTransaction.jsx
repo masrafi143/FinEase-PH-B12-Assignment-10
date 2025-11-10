@@ -24,7 +24,7 @@ const AddTransaction = () => {
       amount,
       description,
       date,
-      email,
+      user_email: email,
       name,
     };
 
