@@ -9,9 +9,9 @@ const Footer = () => {
         <aside>
           <img src={fineaseLogo} className="w-[100px] h-[100px]" alt="" />
           <p>
-            <h2 className="font-bold text-secondary text-3xl">
+            <span className="font-bold text-secondary text-3xl">
               Fin<span className="text-primary">Ease</span>
-            </h2>
+            </span>
             <br />
             Providing reliable tech since 2025
           </p>

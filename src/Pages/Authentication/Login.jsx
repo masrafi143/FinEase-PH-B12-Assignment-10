@@ -17,7 +17,7 @@ const Login = () => {
     const password = e.target.password.value;
 
     const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
     // console.log(email, password,terms);
     if (!passwordPattern.test(password)) {
       setError(

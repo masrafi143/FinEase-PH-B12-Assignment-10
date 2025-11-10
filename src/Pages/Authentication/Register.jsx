@@ -20,7 +20,7 @@ const Register = () => {
     setPhotoUrl(photo);
     // const terms = e.target.terms.checked;
     const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
     if (!passwordPattern.test(password)) {
       setError(
         "❌ Password must be at least 6 characters long and include at least one uppercase, one lowercase, and one special character."
