@@ -50,7 +50,6 @@ const MyTransactions = () => {
     });
   };
 
-
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold mb-4">
@@ -91,11 +90,12 @@ const MyTransactions = () => {
                   Update
                 </button>
                 <Link
-                to={`details/${t._id}`}                
+                  to={`/transactions/${t._id}`}
                   className="btn btn-sm btn-outline btn-info"
                 >
                   View
                 </Link>
+
                 <button
                   onClick={() => handleDeleteTransaction(t._id)}
                   className="btn btn-sm btn-outline btn-error"
