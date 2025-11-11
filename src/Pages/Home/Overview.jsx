@@ -7,7 +7,6 @@ const Overview = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // DB থেকে user-এর transaction fetch
     fetch(`http://localhost:3000/transactions?email=${user?.email}`)
       .then((res) => res.json())
       .then((transactions) => {

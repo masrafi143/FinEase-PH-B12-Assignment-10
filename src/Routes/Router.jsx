@@ -10,6 +10,7 @@ import AddTransaction from "../Pages/Transactions/AddTransaction";
 import MyTransactions from "../Pages/Transactions/MyTransactions";
 import TransactionDetails from "../Pages/Transactions/TransactionDetails";
 import UpdateTransactions from "../Pages/Transactions/UpdateTransactions";
+import ReportCharts from "../Pages/ReportsPage/ReportCharts";
 
 
 export const router = createBrowserRouter([
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         Component: MyProfile
+      },
+      {
+        path: 'reports',
+        Component: ReportCharts
       }
     ],
 },

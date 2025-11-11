@@ -19,6 +19,7 @@ const Navbar = () => {
       <NavLink to={"/add-transactions"}>Add Transaction</NavLink>
       <NavLink to={"/my-transactions"}>My Transaction</NavLink>
       <NavLink to={"/profile"}>My Profile</NavLink>
+      <NavLink to={"/reports"}>Reports</NavLink>
     </div>
     </>
   );
