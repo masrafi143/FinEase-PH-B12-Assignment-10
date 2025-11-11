@@ -9,6 +9,7 @@ import MyProfile from "../Pages/Profile/MyProfile";
 import AddTransaction from "../Pages/Transactions/AddTransaction";
 import MyTransactions from "../Pages/Transactions/MyTransactions";
 import TransactionDetails from "../Pages/Transactions/TransactionDetails";
+import UpdateTransactions from "../Pages/Transactions/UpdateTransactions";
 
 
 export const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
         path: 'transactions/:id',
         Component: TransactionDetails,
         loader: ({ params }) => fetch(`http://localhost:3000/transactions/${params.id}`)
+      },
+      {
+        path: 'transactions/update/:id',
+        Component: UpdateTransactions,
       },
       {
         path: "login",

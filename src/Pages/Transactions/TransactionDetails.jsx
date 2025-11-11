@@ -6,7 +6,8 @@ const TransactionDetails = () => {
   const { user } = use(AuthContext);
 
   const transactionData = useLoaderData();
-  const [transaction] = useState(transactionData); // no need to update, loader gives it
+  const [transaction] = useState(transactionData);
+  console.log("load ghgugf",transactionData);
   const [categoryTotal, setCategoryTotal] = useState(0);
 
   // Calculate total amount for this category easily

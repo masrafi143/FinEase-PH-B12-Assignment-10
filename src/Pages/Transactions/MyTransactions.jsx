@@ -83,12 +83,13 @@ const MyTransactions = () => {
               </p>
 
               <div className="card-actions justify-end mt-3">
-                <button
+                <Link
+                to={`/transactions/update/${t._id}`}
                   // onClick={() => handleUpdate(t._id)}
                   className="btn btn-sm btn-outline btn-primary"
                 >
                   Update
-                </button>
+                </Link>
                 <Link
                   to={`/transactions/${t._id}`}
                   className="btn btn-sm btn-outline btn-info"
