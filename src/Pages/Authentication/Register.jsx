@@ -64,7 +64,7 @@ const Register = () => {
           .then((res) => res.json())
           .then((data) => {
             toast.success("✅ Account created successfully!");
-            // navigate("/dashboard");
+            navigate("/");
           });
       })
       .catch((err) => setError(err.message));
