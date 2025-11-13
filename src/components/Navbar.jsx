@@ -63,7 +63,7 @@ const Navbar = () => {
             {/* Dropdown content (for mobile) */}
             <ul
               tabIndex={0}
-              className={`menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow rounded-box w-52 ${
+              className={`menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow rounded-box w-52 nav-links ${
                 dark ? "bg-gray-800 text-white" : "bg-base-100 text-secondary"
               }`}
             >
@@ -85,7 +85,7 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-3 font-semibold text-primary">
+          <ul className="menu menu-horizontal px-1 space-x-3 font-semibold text-primary nav-links">
             {links}
           </ul>
         </div>
@@ -157,7 +157,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <hr className="text-primary" />
     </nav>
   );
 };

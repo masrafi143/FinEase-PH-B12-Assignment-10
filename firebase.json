@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "finease-6760b",
     "public": "dist",
     "ignore": [
       "firebase.json",

@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { use, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const AddTransaction = () => {
-  const { user } = useContext(AuthContext);
+  const { dbUser  } = use(AuthContext);
   const [transactions, setTransactions] = useState([]);
 
   const handleAddTransaction = (e) => {
@@ -15,8 +15,8 @@ const AddTransaction = () => {
     const amount = parseFloat(form.amount.value);
     const description = form.description.value;
     const date = form.date.value;
-    const email = user?.email;
-    const name = user?.displayName;
+    const email = dbUser?.email;
+    const name = dbUser?.name;
 
     const newTransaction = {
       type,
@@ -49,6 +49,7 @@ const AddTransaction = () => {
           setTransactions(newTransactions);
         }
       });
+      form.reset();
   };
 
   return (
@@ -127,7 +128,7 @@ const AddTransaction = () => {
             type="text"
             name="username"
             className="input input-bordered w-full bg-base-300"
-            defaultValue={user?.displayName}
+            defaultValue={dbUser?.name}
             readOnly
           />
         </div>
@@ -139,7 +140,7 @@ const AddTransaction = () => {
             type="email"
             name="email"
             className="input input-bordered w-full bg-base-300"
-            defaultValue={user?.email}
+            defaultValue={dbUser?.email}
             readOnly
           />
         </div>

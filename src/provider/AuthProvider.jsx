@@ -82,6 +82,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     dark,
     setDark,
+    fetchDbUser
   };
 
   return (

@@ -105,7 +105,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[70vh]">
+    <div className="flex justify-center items-center py-5 md:py-10">
       <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
         <div className="card-body">
           <h2 className="font-bold text-center text-2xl mb-4">
@@ -134,7 +134,7 @@ const Login = () => {
               />
               <button
                 onClick={handleTogglePasswordShow}
-                className="btn btn-xs absolute top-2 right-4 md:right-6"
+                className="btn btn-xs absolute top-2 right-4 md:right-6 z-50"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>

@@ -30,7 +30,7 @@ const Overview = () => {
 
   const balance = data.income - data.expense;
 
-  if (loading)
+  if (user && loading)
     return (
       <div className="flex justify-center py-10">
         <span className="loading loading-spinner text-primary"></span>
