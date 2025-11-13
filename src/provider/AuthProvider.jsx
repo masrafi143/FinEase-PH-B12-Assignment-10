@@ -18,12 +18,12 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);      // Firebase user
-  const [dbUser, setDbUser] = useState(null);  // MongoDB user
+  const [user, setUser] = useState(null);
+  const [dbUser, setDbUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dark, setDark] = useState(false);
 
-  // Firebase Auth methods
+
   const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
   const signInUser = (email, password) => signInWithEmailAndPassword(auth, email, password);
   const signInWithGoogle = () => {
@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = () => {
     setLoading(true);
-    setDbUser(null); // Clear MongoDB user on logout
+    setDbUser(null);
     return signOut(auth);
   };
   const forgotPassword = (email) => sendPasswordResetEmail(auth, email);
@@ -55,12 +55,11 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  // Listen to Firebase auth changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser?.email) {
-        fetchDbUser(currentUser.email); // Load MongoDB user on login
+        fetchDbUser(currentUser.email);
       } else {
         setDbUser(null);
       }

@@ -53,7 +53,7 @@ const MyProfile = () => {
       .then((result) => {
         if (result.modifiedCount > 0) {
           toast.success("Profile updated successfully!");
-          setDbUser({ ...dbUser, ...updatedInfo }); // Update context
+          setDbUser({ ...dbUser, ...updatedInfo });
           setUpdate(false);
         } else {
           toast.info("No changes detected.");

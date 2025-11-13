@@ -6,14 +6,14 @@ import { Link } from "react-router";
 const MyTransactions = () => {
   const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
-  const [sortType, setSortType] = useState("default"); // 'default' | 'date' | 'amount'
-  const [loading, setLoading] = useState(true); // 🔹 Added loading state
+  const [sortType, setSortType] = useState("default");
+  const [loading, setLoading] = useState(true);
 
-  // 🟢 Fetch transactions based on sortType
+
   useEffect(() => {
     if (!user?.email) return;
 
-    setLoading(true); // start loading before fetch
+    setLoading(true);
 
     let url = `https://finease-server-c7jy.onrender.com/transactions?email=${user.email}`;
     if (sortType === "date") {
@@ -28,10 +28,10 @@ const MyTransactions = () => {
         setTransactions(data);
       })
       .catch((err) => console.error("Error fetching transactions:", err))
-      .finally(() => setLoading(false)); // stop loading in all cases
+      .finally(() => setLoading(false));
   }, [user?.email, sortType]);
 
-  // 🔴 Delete a transaction
+  // Delete a transaction
   const handleDeleteTransaction = (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -62,7 +62,7 @@ const MyTransactions = () => {
     });
   };
 
-  // 🟣 Loading spinner while fetching data
+  // Loading spinner while fetching data
   if (loading)
     return (
       <div className="flex justify-center items-center h-[60vh]">
@@ -73,7 +73,7 @@ const MyTransactions = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between md:px-10 items-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-primary">
+        <h2 className="text-lg md:text-3xl font-bold mb-4 text-primary">
           My Transactions: {transactions.length}
         </h2>
 

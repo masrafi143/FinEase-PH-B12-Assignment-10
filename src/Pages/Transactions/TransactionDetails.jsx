@@ -16,7 +16,6 @@ const TransactionDetails = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          // Separate totals for Income and Expense
           const incomeTotal = data
             .filter((t) => t.type === "Income")
             .reduce((sum, t) => sum + Number(t.amount), 0);
@@ -83,7 +82,6 @@ const TransactionDetails = () => {
             </p>
           </div>
 
-          {/* Category Summary Section */}
           <div className="mt-6 p-4 bg-indigo-50 rounded-lg text-center">
             <p className="text-gray-700 font-medium mb-2 text-2xl">
               Total in this Category

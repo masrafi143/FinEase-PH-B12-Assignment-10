@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// Fixed color mapping for categories
+
 const CATEGORY_COLORS = {
   Food: "#FFBB28",
   Transport: "#0088FE",
@@ -22,8 +22,8 @@ const CATEGORY_COLORS = {
   Bills: "#FF8042",
   Salary: "#AA46BE",
   Other: "#8884d8",
-  Income: "#00C49F", // default income color
-  Expense: "#FF8042", // default expense color
+  Income: "#00C49F",
+  Expense: "#FF8042",
 };
 
 const ReportCharts = () => {

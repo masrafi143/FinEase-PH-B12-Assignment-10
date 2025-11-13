@@ -13,7 +13,6 @@ import UpdateTransactions from "../Pages/Transactions/UpdateTransactions";
 import ReportCharts from "../Pages/ReportsPage/ReportCharts";
 import PrivateRoutes from "./PrivateRoutes";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -24,29 +23,40 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: 'add-transactions',
-        element: <PrivateRoutes>
-          <AddTransaction/>
-        </PrivateRoutes>
+        path: "add-transactions",
+        element: (
+          <PrivateRoutes>
+            <AddTransaction />
+          </PrivateRoutes>
+        ),
       },
       {
-        path: 'my-transactions',
-        element: <PrivateRoutes>
-          <MyTransactions/>
-        </PrivateRoutes>
+        path: "my-transactions",
+        element: (
+          <PrivateRoutes>
+            <MyTransactions />
+          </PrivateRoutes>
+        ),
       },
       {
-        path: 'transactions/:id',
-        element: <PrivateRoutes>
-          <TransactionDetails/>
-        </PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://finease-server-c7jy.onrender.com/transactions/${params.id}`)
+        path: "transactions/:id",
+        element: (
+          <PrivateRoutes>
+            <TransactionDetails />
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://finease-server-c7jy.onrender.com/transactions/${params.id}`
+          ),
       },
       {
-        path: 'transactions/update/:id',
-        element: <PrivateRoutes>
-          <UpdateTransactions/>
-        </PrivateRoutes>
+        path: "transactions/update/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateTransactions />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "login",
@@ -54,24 +64,28 @@ export const router = createBrowserRouter([
       },
       {
         path: "register",
-        Component:Register,
+        Component: Register,
       },
       {
-        path: 'profile',
-        element: <PrivateRoutes>
-          <MyProfile/>
-        </PrivateRoutes>
+        path: "profile",
+        element: (
+          <PrivateRoutes>
+            <MyProfile />
+          </PrivateRoutes>
+        ),
       },
       {
-        path: 'reports',
-        element: <PrivateRoutes>
-          <ReportCharts/>
-        </PrivateRoutes>
-      }
+        path: "reports",
+        element: (
+          <PrivateRoutes>
+            <ReportCharts />
+          </PrivateRoutes>
+        ),
+      },
     ],
-},
-{
-  path: "*",
-  Component: Error404,
-},
+  },
+  {
+    path: "*",
+    Component: Error404,
+  },
 ]);

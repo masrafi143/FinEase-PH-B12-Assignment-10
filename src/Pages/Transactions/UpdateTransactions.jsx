@@ -7,7 +7,6 @@ const UpdateTransactions = () => {
   const navigate = useNavigate();
   const [transaction, setTransaction] = useState(null);
 
-  // Fetch transaction by ID
   useEffect(() => {
     fetch(`https://finease-server-c7jy.onrender.com/transactions/${id}`)
       .then((res) => res.json())
@@ -15,7 +14,6 @@ const UpdateTransactions = () => {
       .catch((err) => console.error("Error loading transaction:", err));
   }, [id]);
 
-  // Handle update
   const handleUpdateTransaction = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -35,10 +33,10 @@ const UpdateTransactions = () => {
     });
 
     if (res.ok) {
-      toast.success("✅ Transaction updated successfully!");
+      toast.success("Transaction updated successfully!");
       navigate(`/transactions/${id}`);
     } else {
-      toast.error("❌ Failed to update transaction!");
+      toast.error("Failed to update transaction!");
     }
   };
 

@@ -18,19 +18,18 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  // ✅ Check if email already exists in DB
   const checkDuplicateEmail = async (email) => {
     try {
       const res = await fetch(`https://finease-server-c7jy.onrender.com/users?email=${email}`);
       const data = await res.json();
-      return data.length > 0; // true if exists
+      return data.length > 0;
     } catch (err) {
       console.error("Error checking email:", err);
       return false;
     }
   };
 
-  // ✅ Email/Password Login
+  // Email/Password Login
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -49,18 +48,18 @@ const Login = () => {
     setSuccess(false);
     signInUser(email, password)
       .then(() => {
-        toast.success("✅ Login successful!");
+        toast.success("Login successful!");
         setSuccess(true);
         navigate(location?.state || "/");
       })
       .catch((error) => {
         console.error(error.message);
         setError(error.message);
-        toast.error("❌ Invalid email or password!");
+        toast.error("Invalid email or password!");
       });
   };
 
-  // ✅ Forgot Password
+  // Forgot Password
   const handleForgetPassword = () => {
     const email = emailRef.current.value;
     forgotPassword(email)
@@ -70,7 +69,7 @@ const Login = () => {
       .catch((error) => setError(error.message));
   };
 
-  // ✅ Google Sign-In (with DB save)
+  // Google Sign-In (with DB save)
   const handleGoogleSignIn = async () => {
     signInWithGoogle()
       .then(async (result) => {
@@ -90,9 +89,9 @@ const Login = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(googleUser),
           });
-          toast.success("✅ New user added to DB via Google!");
+          toast.success("New user added to DB via Google!");
         } else {
-          toast.info("⚠️ Welcome back!");
+          toast.info("Welcome back!");
         }
 
         setSuccess(true);
@@ -101,12 +100,12 @@ const Login = () => {
       .catch((error) => {
         console.error(error);
         setError(error.message);
-        toast.error("❌ Google Sign-in failed!");
+        toast.error("Google Sign-in failed!");
       });
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center h-[70vh]">
       <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
         <div className="card-body">
           <h2 className="font-bold text-center text-2xl mb-4">
@@ -147,7 +146,7 @@ const Login = () => {
               </a>
             </div>
 
-            {success && <p className="text-green-500">✅ Login successful!</p>}
+            {success && <p className="text-green-500">Login successful!</p>}
             {error && <p className="text-red-500">{error}</p>}
 
             <button className="btn btn-secondary text-white mt-4 w-full">

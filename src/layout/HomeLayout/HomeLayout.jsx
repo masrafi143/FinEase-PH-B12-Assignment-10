@@ -11,8 +11,8 @@ const HomeLayout = () => {
     <div
       className={`min-h-screen transition-colors duration-300 ${
         dark
-          ? "bg-gray-950"   // 🔹 Slightly darker gray (softer than navbar/footer)
-          : "bg-[#f9fafb] text-gray-800"  // 🔸 Light gray background (off-white)
+          ? "bg-gray-950"
+          : "bg-[#f9fafb] text-gray-800"
       }`}
     >
       <Navbar />
