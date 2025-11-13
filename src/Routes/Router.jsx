@@ -11,6 +11,7 @@ import MyTransactions from "../Pages/Transactions/MyTransactions";
 import TransactionDetails from "../Pages/Transactions/TransactionDetails";
 import UpdateTransactions from "../Pages/Transactions/UpdateTransactions";
 import ReportCharts from "../Pages/ReportsPage/ReportCharts";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 export const router = createBrowserRouter([
@@ -24,20 +25,28 @@ export const router = createBrowserRouter([
       },
       {
         path: 'add-transactions',
-        Component: AddTransaction
+        element: <PrivateRoutes>
+          <AddTransaction/>
+        </PrivateRoutes>
       },
       {
         path: 'my-transactions',
-        Component: MyTransactions
+        element: <PrivateRoutes>
+          <MyTransactions/>
+        </PrivateRoutes>
       },
       {
         path: 'transactions/:id',
-        Component: TransactionDetails,
+        element: <PrivateRoutes>
+          <TransactionDetails/>
+        </PrivateRoutes>,
         loader: ({ params }) => fetch(`https://finease-api-server.vercel.app/transactions/${params.id}`)
       },
       {
         path: 'transactions/update/:id',
-        Component: UpdateTransactions,
+        element: <PrivateRoutes>
+          <UpdateTransactions/>
+        </PrivateRoutes>
       },
       {
         path: "login",
@@ -49,11 +58,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        Component: MyProfile
+        element: <PrivateRoutes>
+          <MyProfile/>
+        </PrivateRoutes>
       },
       {
         path: 'reports',
-        Component: ReportCharts
+        element: <PrivateRoutes>
+          <ReportCharts/>
+        </PrivateRoutes>
       }
     ],
 },

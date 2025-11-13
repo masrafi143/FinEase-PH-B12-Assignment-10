@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +8,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, signInWithGoogle, setPhotoUrl } = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
 
   const togglePassword = (e) => {
@@ -64,7 +65,7 @@ const Register = () => {
           .then((res) => res.json())
           .then((data) => {
             toast.success("✅ Account created successfully!");
-            navigate("/");
+            navigate(location?.state || "/");
           });
       })
       .catch((err) => setError(err.message));
@@ -79,6 +80,7 @@ const Register = () => {
           email: result.user.email,
           image: result.user.photoURL,
         };
+        navigate(location?.state || "/");
 
         const exists = await checkDuplicateEmail(googleUser.email);
         if (exists) {
