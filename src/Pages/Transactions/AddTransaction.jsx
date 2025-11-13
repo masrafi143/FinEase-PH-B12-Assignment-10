@@ -56,7 +56,7 @@ const AddTransaction = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 bg-base-200 p-6 rounded-2xl shadow-lg">
+    <div className="max-w-lg mx-auto bg-base-200 my-6 p-6 rounded-2xl shadow-lg">
       <h2 className="text-2xl font-semibold text-center mb-5">
         Add New Transaction
       </h2>

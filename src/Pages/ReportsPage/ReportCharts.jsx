@@ -85,7 +85,7 @@ const ReportCharts = () => {
   }));
 
   return (
-    <div className="p-5 bg-base-200 rounded-2xl shadow-lg">
+    <div className="p-5 rounded-2xl shadow-lg">
       <h2 className="text-2xl font-bold text-primary text-center mb-10">
         Financial Reports Dashboard
       </h2>

@@ -4,7 +4,7 @@ import fineaseLogo from "/fineaseLogo.png";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-  const { user, dbUser, logOut } = useContext(AuthContext);
+  const { user, dbUser, logOut, dark, setDark } = useContext(AuthContext);
 
   const demoUser = {
     image:
@@ -14,6 +14,10 @@ const Navbar = () => {
   const profileImage = dbUser?.image || demoUser.image;
   const displayName = dbUser?.name;
   const displayEmail = dbUser?.email;
+
+  const handleToggleMode = () => {
+    setDark(!dark);
+  }
 
   const handleLogout = () => {
     logOut().catch((err) => console.log(err));
@@ -28,9 +32,14 @@ const Navbar = () => {
       <NavLink to={"/reports"}>Reports</NavLink>
     </div>
   );
+  console.log(dark);
 
   return (
-    <nav className="bg-base-300 shadow-sm">
+    <nav className={`shadow-sm ${
+        dark
+          ? "bg-gray-900 text-white"
+          : "bg-base-300 text-secondary"
+      } transition-colors duration-300`}>
       <div className="navbar w-11/12 mx-auto">
         <div className="navbar-start">
           <Link
@@ -49,8 +58,9 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
+          {/* toggle mode */}
           <label className="swap swap-rotate space-x-5">
-            <input type="checkbox" />
+            <input onClick={handleToggleMode} type="checkbox" />
 
             <svg
               className="swap-on h-10 w-10 fill-current"

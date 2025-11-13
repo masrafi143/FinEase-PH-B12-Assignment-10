@@ -62,7 +62,7 @@ const MyTransactions = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between px-10 items-center">
-        <h2 className="text-3xl font-bold mb-4">
+        <h2 className="text-3xl font-bold mb-4 text-primary">
           My Transactions: {transactions.length}
         </h2>
 

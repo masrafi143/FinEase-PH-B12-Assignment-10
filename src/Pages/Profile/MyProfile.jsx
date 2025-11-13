@@ -63,7 +63,7 @@ const MyProfile = () => {
   const userPhoto = dbUser?.image || demoUser.image;
 
   return (
-    <div className="bg-base-200 py-10 px-5 min-h-screen">
+    <div className="py-10 px-5 min-h-screen">
       <div className="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg">
         <div className="flex flex-col items-center">
           <img

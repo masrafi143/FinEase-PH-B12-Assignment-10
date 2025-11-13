@@ -1,11 +1,17 @@
-import React from "react";
+import React, { use } from "react";
 import fineaseLogo from "/fineaseLogo.png";
 import { FaFacebookF, FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Footer = () => {
+  const { dark} = use(AuthContext);
   return (
     <>
-      <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10 pb-5">
+      <footer className={`footer sm:footer-horizontal p-10 pb-5 transition-colors duration-300 ${
+          dark
+            ? "bg-gray-900 text-gray-200"
+            : "bg-base-300 text-base-content"
+        }`}>
         <aside>
           <img src={fineaseLogo} className="w-[100px] h-[100px]" alt="" />
           <p>
@@ -54,7 +60,11 @@ const Footer = () => {
         </nav>
       </footer>
       <hr className="text-[#1a75ac]" />
-      <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4">
+      <footer className={`footer sm:footer-horizontal footer-center p-4 transition-colors duration-300 ${
+          dark
+            ? "bg-gray-900 text-gray-300"
+            : "bg-base-300 text-base-content"
+        }`}>
         <aside>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by

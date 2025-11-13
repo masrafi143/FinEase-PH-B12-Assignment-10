@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);      // Firebase user
   const [dbUser, setDbUser] = useState(null);  // MongoDB user
   const [loading, setLoading] = useState(true);
+  const [dark, setDark] = useState(false);
 
   // Firebase Auth methods
   const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
@@ -79,7 +80,9 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     logOut,
     forgotPassword,
-    updateUserProfile
+    updateUserProfile,
+    dark,
+    setDark,
   };
 
   return (
