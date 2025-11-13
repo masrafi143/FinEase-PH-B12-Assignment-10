@@ -47,8 +47,8 @@ const ReportCharts = () => {
 
   if (loading)
     return (
-      <div className="flex justify-center py-10">
-        <span className="loading loading-spinner text-primary"></span>
+      <div className="flex justify-center items-center h-[60vh]">
+        <span className="loading loading-spinner text-primary w-12 h-12"></span>
       </div>
     );
 

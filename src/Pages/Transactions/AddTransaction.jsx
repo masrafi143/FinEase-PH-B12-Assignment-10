@@ -4,7 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const AddTransaction = () => {
   const { user } = useContext(AuthContext);
-  const [transactions, setTransactions]= useState([]);
+  const [transactions, setTransactions] = useState([]);
 
   const handleAddTransaction = (e) => {
     e.preventDefault();
@@ -28,12 +28,9 @@ const AddTransaction = () => {
       name,
     };
 
-    // send to backend
     fetch("http://localhost:3000/transactions", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(newTransaction),
     })
       .then((res) => res.json())
@@ -46,7 +43,6 @@ const AddTransaction = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          //   form.reset();
           newTransaction._id = data.insertedId;
           const newTransactions = [...transactions, newTransaction];
           newTransactions.sort((a, b) => b.date - a.data);
@@ -56,15 +52,16 @@ const AddTransaction = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-base-200 my-6 p-6 rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-semibold text-center mb-5">
+    <div className="max-w-lg mx-auto bg-base-200 my-8 p-8 rounded-2xl shadow-lg border border-base-300">
+      <h2 className="text-3xl font-bold text-center mb-8 text-primary">
         Add New Transaction
       </h2>
-      <form onSubmit={handleAddTransaction} className="space-y-4">
+
+      <form onSubmit={handleAddTransaction} className="space-y-2">
         {/* Type */}
         <div className="form-control">
-          <label className="label font-medium">Type</label>
-          <select name="type" className="select select-bordered" required>
+          <label className="block mb-2 font-medium text-base">Type</label>
+          <select name="type" className="select select-bordered w-full" required>
             <option value="">Select type</option>
             <option value="Income">Income</option>
             <option value="Expense">Expense</option>
@@ -73,8 +70,12 @@ const AddTransaction = () => {
 
         {/* Category */}
         <div className="form-control">
-          <label className="label font-medium">Category</label>
-          <select name="category" className="select select-bordered" required>
+          <label className="block mb-2 font-medium text-base">Category</label>
+          <select
+            name="category"
+            className="select select-bordered w-full"
+            required
+          >
             <option value="">Select category</option>
             <option value="Salary">Salary</option>
             <option value="Food">Food</option>
@@ -87,63 +88,67 @@ const AddTransaction = () => {
 
         {/* Amount */}
         <div className="form-control">
-          <label className="label font-medium">Amount</label>
+          <label className="block mb-2 font-medium text-base">Amount</label>
           <input
             type="number"
             name="amount"
             placeholder="Enter amount"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             required
           />
         </div>
 
         {/* Description */}
         <div className="form-control">
-          <label className="label font-medium">Description</label>
+          <label className="block mb-2 font-medium text-base">Description</label>
           <textarea
             name="description"
-            placeholder="Short description"
-            className="textarea textarea-bordered"
+            placeholder="Short description..."
+            className="textarea textarea-bordered w-full"
             required
           ></textarea>
         </div>
 
         {/* Date */}
         <div className="form-control">
-          <label className="label font-medium">Date</label>
+          <label className="block mb-2 font-medium text-base">Date</label>
           <input
             type="date"
             name="date"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             required
           />
         </div>
 
-        {/* Read-only fields */}
+        {/* User Name */}
         <div className="form-control">
-          <label className="label font-medium">User Name</label>
+          <label className="block mb-2 font-medium text-base">User Name</label>
           <input
             type="text"
             name="username"
-            className="input input-bordered"
+            className="input input-bordered w-full bg-base-300"
             defaultValue={user?.displayName}
             readOnly
           />
         </div>
 
+        {/* User Email */}
         <div className="form-control">
-          <label className="label font-medium">User Email</label>
+          <label className="block mb-2 font-medium text-base">User Email</label>
           <input
             type="email"
             name="email"
-            className="input input-bordered"
+            className="input input-bordered w-full bg-base-300"
             defaultValue={user?.email}
             readOnly
           />
         </div>
 
-        {/* Submit button */}
-        <button type="submit" className="btn btn-primary w-full mt-3">
+        {/* Submit */}
+        <button
+          type="submit"
+          className="btn btn-primary w-full text-lg font-semibold mt-4"
+        >
           Add Transaction
         </button>
       </form>

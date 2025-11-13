@@ -7,10 +7,13 @@ const MyTransactions = () => {
   const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const [sortType, setSortType] = useState("default"); // 'default' | 'date' | 'amount'
+  const [loading, setLoading] = useState(true); // 🔹 Added loading state
 
   // 🟢 Fetch transactions based on sortType
   useEffect(() => {
     if (!user?.email) return;
+
+    setLoading(true); // start loading before fetch
 
     let url = `http://localhost:3000/transactions?email=${user.email}`;
     if (sortType === "date") {
@@ -23,9 +26,9 @@ const MyTransactions = () => {
       .then((res) => res.json())
       .then((data) => {
         setTransactions(data);
-        console.log("Fetched:", sortType, data);
       })
-      .catch((err) => console.error("Error fetching transactions:", err));
+      .catch((err) => console.error("Error fetching transactions:", err))
+      .finally(() => setLoading(false)); // stop loading in all cases
   }, [user?.email, sortType]);
 
   // 🔴 Delete a transaction
@@ -58,6 +61,14 @@ const MyTransactions = () => {
       }
     });
   };
+
+  // 🟣 Loading spinner while fetching data
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        <span className="loading loading-spinner text-primary w-12 h-12"></span>
+      </div>
+    );
 
   return (
     <div className="p-6">
