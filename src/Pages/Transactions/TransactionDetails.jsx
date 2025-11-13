@@ -4,13 +4,11 @@ import { useLoaderData } from "react-router";
 
 const TransactionDetails = () => {
   const { user } = use(AuthContext);
-
   const transactionData = useLoaderData();
   const [transaction] = useState(transactionData);
-  console.log("load ghgugf",transactionData);
-  const [categoryTotal, setCategoryTotal] = useState(0);
+  const [categoryIncome, setCategoryIncome] = useState(0);
+  const [categoryExpense, setCategoryExpense] = useState(0);
 
-  // Calculate total amount for this category easily
   useEffect(() => {
     if (transaction && user?.email) {
       fetch(
@@ -18,9 +16,17 @@ const TransactionDetails = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          setCategoryTotal(
-            data.map((t) => Number(t.amount)).reduce((a, b) => a + b, 0)
-          );
+          // Separate totals for Income and Expense
+          const incomeTotal = data
+            .filter((t) => t.type === "Income")
+            .reduce((sum, t) => sum + Number(t.amount), 0);
+
+          const expenseTotal = data
+            .filter((t) => t.type === "Expense")
+            .reduce((sum, t) => sum + Number(t.amount), 0);
+
+          setCategoryIncome(incomeTotal);
+          setCategoryExpense(expenseTotal);
         });
     }
   }, [transaction, user]);
@@ -28,7 +34,7 @@ const TransactionDetails = () => {
   if (!transaction) return <p>Loading transaction details...</p>;
 
   return (
-    <div className="bg-base-200">
+    <div>
       <div className="p-6 max-w-3xl mx-auto">
         <h2 className="text-4xl font-bold mb-6 text-center text-indigo-600">
           Transaction Details
@@ -77,10 +83,16 @@ const TransactionDetails = () => {
             </p>
           </div>
 
+          {/* Category Summary Section */}
           <div className="mt-6 p-4 bg-indigo-50 rounded-lg text-center">
-            <p className="text-gray-700 font-medium">Total in this Category:</p>
-            <p className="text-2xl font-bold text-indigo-700">
-              ${categoryTotal}
+            <p className="text-gray-700 font-medium mb-2 text-2xl">
+              Total in this Category
+            </p>
+            <p className="text-lg font-semibold text-green-600">
+              Total Income: ${categoryIncome}
+            </p>
+            <p className="text-lg font-semibold text-red-600">
+              Total Expenses: ${categoryExpense}
             </p>
           </div>
         </div>

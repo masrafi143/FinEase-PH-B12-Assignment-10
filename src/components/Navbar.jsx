@@ -17,47 +17,82 @@ const Navbar = () => {
 
   const handleToggleMode = () => {
     setDark(!dark);
-  }
+  };
 
   const handleLogout = () => {
     logOut().catch((err) => console.log(err));
   };
 
   const links = (
-    <div className="nav-links space-x-6 text-primary font-semibold">
-      <NavLink to={"/"}>Home</NavLink>
-      <NavLink to={"/add-transactions"}>Add Transaction</NavLink>
-      <NavLink to={"/my-transactions"}>My Transaction</NavLink>
-      <NavLink to={"/profile"}>My Profile</NavLink>
-      <NavLink to={"/reports"}>Reports</NavLink>
-    </div>
+    <>
+      <li><NavLink to="/">Home</NavLink></li>
+      <li><NavLink to="/add-transactions">Add Transaction</NavLink></li>
+      <li><NavLink to="/my-transactions">My Transactions</NavLink></li>
+      <li><NavLink to="/profile">My Profile</NavLink></li>
+      <li><NavLink to="/reports">Reports</NavLink></li>
+    </>
   );
-  console.log(dark);
 
   return (
-    <nav className={`shadow-sm ${
-        dark
-          ? "bg-gray-900 text-white"
-          : "bg-base-300 text-secondary"
-      } transition-colors duration-300`}>
+    <nav
+      className={`shadow-sm ${
+        dark ? "bg-gray-900 text-white" : "bg-base-300 text-secondary"
+      } transition-colors duration-300`}
+    >
       <div className="navbar w-11/12 mx-auto">
+        {/* Left section with mobile dropdown */}
         <div className="navbar-start">
+          <div className="dropdown">
+            {/* Mobile dropdown button */}
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
+            {/* Dropdown content (for mobile) */}
+            <ul
+              tabIndex={0}
+              className={`menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow rounded-box w-52 ${
+                dark ? "bg-gray-800 text-white" : "bg-base-100 text-secondary"
+              }`}
+            >
+              {links}
+            </ul>
+          </div>
+
+          {/* Logo */}
           <Link
             to={"/"}
             className="flex items-center gap-2 text-xl text-secondary"
           >
-            <img src={fineaseLogo} className="w-10 h-[35px]" alt="" />
+            <img src={fineaseLogo} className="w-10 h-[35px]" alt="FinEase logo" />
             <h2 className="font-bold">
               Fin<span className="text-primary">Ease</span>
             </h2>
           </Link>
         </div>
 
+        {/* Desktop Links */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu menu-horizontal px-1 space-x-3 font-semibold text-primary">
+            {links}
+          </ul>
         </div>
 
-        <div className="navbar-end">
+        {/* Right section */}
+        <div className="navbar-end flex items-center gap-3">
+          {/* Dark mode toggle */}
           {/* toggle mode */}
           <label className="swap swap-rotate space-x-5">
             <input onClick={handleToggleMode} type="checkbox" />
@@ -79,51 +114,48 @@ const Navbar = () => {
             </svg>
           </label>
 
-          <div className="flex flex-col md:flex-row items-center gap-3">
-            {user ? (
-              <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="m-1">
-                  <img
-                    src={profileImage}
-                    alt="Profile"
-                    className="rounded-full h-[50px] w-[50px] object-cover"
-                  />
-                </div>
-                <ul
-                  tabIndex="-1"
-                  className="dropdown-content menu bg-[#f7fee7] rounded-box z-2 w-52 p-2 shadow-sm"
-                >
-                  <p className="font-bold text-center text-secondary">
-                    {displayName}
-                  </p>
-                  <p className="text-center text-sm text-gray-600">
-                    {displayEmail}
-                  </p>
-                  <button
-                    onClick={handleLogout}
-                    className="btn bg-primary text-white mt-3 w-fit mx-auto rounded-4xl"
-                  >
-                    Logout
-                  </button>
-                </ul>
+          {/* Auth section */}
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="m-1">
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="rounded-full h-[45px] w-[45px] object-cover"
+                />
               </div>
-            ) : (
-              <>
-                <Link
-                  to={"/login"}
-                  className="btn bg-primary text-white hover:bg-secondary"
+              <ul
+                tabIndex={0}
+                className={`dropdown-content menu rounded-box z-[1] w-52 p-2 shadow ${
+                  dark ? "bg-gray-800 text-white" : "bg-[#f7fee7] text-secondary"
+                }`}
+              >
+                <p className="font-bold text-center">{displayName}</p>
+                <p className="text-center text-sm">{displayEmail}</p>
+                <button
+                  onClick={handleLogout}
+                  className="btn bg-primary text-white mt-3 w-fit mx-auto rounded-4xl"
                 >
-                  Login
-                </Link>
-                <Link
-                  to={"/register"}
-                  className="btn bg-secondary text-white hover:bg-primary hover:border-secondary"
-                >
-                  Register
-                </Link>
-              </>
-            )}
-          </div>
+                  Logout
+                </button>
+              </ul>
+            </div>
+          ) : (
+            <>
+              <Link
+                to={"/login"}
+                className="btn bg-primary text-white hover:bg-secondary"
+              >
+                Login
+              </Link>
+              <Link
+                to={"/register"}
+                className="btn bg-secondary text-white hover:bg-primary hover:border-secondary"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <hr className="text-primary" />
