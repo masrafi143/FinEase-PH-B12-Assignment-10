@@ -7,7 +7,7 @@ const Overview = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://finease-api-server.vercel.app/transactions?email=${user?.email}`)
+    fetch(`http://localhost:3000/transactions?email=${user?.email}`)
       .then((res) => res.json())
       .then((transactions) => {
         let totalIncome = 0;

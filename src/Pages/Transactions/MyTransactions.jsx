@@ -1,23 +1,32 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Link } from "react-router";
 
 const MyTransactions = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
-  // console.log('my-transaction email', user.email)
-  // 🟢 Fetch logged-in user's transactions
+  const [sortType, setSortType] = useState("default"); // 'default' | 'date' | 'amount'
+
+  // 🟢 Fetch transactions based on sortType
   useEffect(() => {
-    if (user?.email) {
-      fetch(`https://finease-api-server.vercel.app/transactions?email=${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setTransactions(data);
-          console.log("User transactions:", data);
-        });
+    if (!user?.email) return;
+
+    let url = `http://localhost:3000/transactions?email=${user.email}`;
+    if (sortType === "date") {
+      url = `http://localhost:3000/transactions-date-sorted?email=${user.email}`;
+    } else if (sortType === "amount") {
+      url = `http://localhost:3000/transactions-amount-sorted?email=${user.email}`;
     }
-  }, [user?.email]);
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setTransactions(data);
+        console.log("Fetched:", sortType, data);
+      })
+      .catch((err) => console.error("Error fetching transactions:", err));
+  }, [user?.email, sortType]);
 
   // 🔴 Delete a transaction
   const handleDeleteTransaction = (_id) => {
@@ -31,7 +40,7 @@ const MyTransactions = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://finease-api-server.vercel.app/transactions/${_id}`, {
+        fetch(`http://localhost:3000/transactions/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -52,9 +61,32 @@ const MyTransactions = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">
-        My Transactions: {transactions.length}
-      </h2>
+      <div className="flex justify-between px-10 items-center">
+        <h2 className="text-3xl font-bold mb-4">
+          My Transactions: {transactions.length}
+        </h2>
+
+        {/* Sorting Dropdown */}
+        <div className="dropdown dropdown-bottom dropdown-end">
+          <div tabIndex={0} role="button" className="btn m-1">
+            Sort by ⬇️
+          </div>
+          <ul
+            tabIndex="-1"
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+          >
+            <li>
+              <button onClick={() => setSortType("date")}>📅 Date (latest)</button>
+            </li>
+            <li>
+              <button onClick={() => setSortType("amount")}>💰 Amount (Highest)</button>
+            </li>
+            <li>
+              <button onClick={() => setSortType("default")}>🔁 Default</button>
+            </li>
+          </ul>
+        </div>
+      </div>
 
       {/* Card Layout */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,8 +116,7 @@ const MyTransactions = () => {
 
               <div className="card-actions justify-end mt-3">
                 <Link
-                to={`/transactions/update/${t._id}`}
-                  // onClick={() => handleUpdate(t._id)}
+                  to={`/transactions/update/${t._id}`}
                   className="btn btn-sm btn-outline btn-primary"
                 >
                   Update
@@ -96,7 +127,6 @@ const MyTransactions = () => {
                 >
                   View
                 </Link>
-
                 <button
                   onClick={() => handleDeleteTransaction(t._id)}
                   className="btn btn-sm btn-outline btn-error"
@@ -108,7 +138,6 @@ const MyTransactions = () => {
           </div>
         ))}
 
-        {/* if no transactions */}
         {transactions.length === 0 && (
           <p className="text-center col-span-full text-gray-400">
             No transactions found.

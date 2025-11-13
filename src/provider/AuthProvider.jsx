@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
   const fetchDbUser = async (email) => {
     if (!email) return;
     try {
-      const res = await fetch(`https://finease-api-server.vercel.app/users?email=${email}`);
+      const res = await fetch(`http://localhost:3000/users?email=${email}`);
       const data = await res.json();
       if (data.length > 0) setDbUser(data[0]);
     } catch (err) {

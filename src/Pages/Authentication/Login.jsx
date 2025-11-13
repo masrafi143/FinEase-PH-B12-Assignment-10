@@ -21,7 +21,7 @@ const Login = () => {
   // ✅ Check if email already exists in DB
   const checkDuplicateEmail = async (email) => {
     try {
-      const res = await fetch(`https://finease-api-server.vercel.app/users?email=${email}`);
+      const res = await fetch(`http://localhost:3000/users?email=${email}`);
       const data = await res.json();
       return data.length > 0; // true if exists
     } catch (err) {
@@ -85,7 +85,7 @@ const Login = () => {
 
         if (!exists) {
           // Save to DB only if new user
-          await fetch("https://finease-api-server.vercel.app/users", {
+          await fetch("http://localhost:3000/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(googleUser),

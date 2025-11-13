@@ -14,7 +14,7 @@ const TransactionDetails = () => {
   useEffect(() => {
     if (transaction && user?.email) {
       fetch(
-        `https://finease-api-server.vercel.app/transactions?email=${user.email}&category=${transaction.category}`
+        `http://localhost:3000/transactions?email=${user.email}&category=${transaction.category}`
       )
         .then((res) => res.json())
         .then((data) => {
