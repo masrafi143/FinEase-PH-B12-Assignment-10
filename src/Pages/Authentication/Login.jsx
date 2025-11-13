@@ -65,7 +65,7 @@ const Login = () => {
     const email = emailRef.current.value;
     forgotPassword(email)
       .then(() => {
-        toast("📩 Please check your email to reset password.");
+        alert("📩 Please check your email to reset password.");
       })
       .catch((error) => setError(error.message));
   };
@@ -135,7 +135,7 @@ const Login = () => {
               />
               <button
                 onClick={handleTogglePasswordShow}
-                className="btn btn-xs absolute top-2 right-4 md:right-6 z-50"
+                className="btn btn-xs absolute top-2 right-4 md:right-6"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
