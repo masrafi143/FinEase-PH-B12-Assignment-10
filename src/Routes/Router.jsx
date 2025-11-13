@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes>
           <TransactionDetails/>
         </PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:3000/transactions/${params.id}`)
+        loader: ({ params }) => fetch(`https://finease-server-c7jy.onrender.com/transactions/${params.id}`)
       },
       {
         path: 'transactions/update/:id',

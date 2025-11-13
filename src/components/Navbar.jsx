@@ -39,7 +39,7 @@ const Navbar = () => {
         dark ? "bg-gray-900 text-white" : "bg-base-300 text-secondary"
       } transition-colors duration-300`}
     >
-      <div className="navbar w-11/12 mx-auto">
+      <div className="navbar md:w-11/12 md:mx-auto">
         {/* Left section with mobile dropdown */}
         <div className="navbar-start">
           <div className="dropdown">
@@ -93,8 +93,7 @@ const Navbar = () => {
         {/* Right section */}
         <div className="navbar-end flex items-center gap-3">
           {/* Dark mode toggle */}
-          {/* toggle mode */}
-          <label className="swap swap-rotate space-x-5">
+          <label className="swap swap-rotate space-x-2 md:space-x-5">
             <input onClick={handleToggleMode} type="checkbox" />
 
             <svg
@@ -116,7 +115,7 @@ const Navbar = () => {
 
           {/* Auth section */}
           {user ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end z-100">
               <div tabIndex={0} role="button" className="m-1">
                 <img
                   src={profileImage}
@@ -127,11 +126,11 @@ const Navbar = () => {
               <ul
                 tabIndex={0}
                 className={`dropdown-content menu rounded-box z-[1] w-52 p-2 shadow ${
-                  dark ? "bg-gray-800 text-white" : "bg-[#f7fee7] text-secondary"
+                  dark ? "bg-gray-800 text-white" : "bg-[#f7fee7]"
                 }`}
               >
-                <p className="font-bold text-center">{displayName}</p>
-                <p className="text-center text-sm">{displayEmail}</p>
+                <p className="font-bold text-center text-secondary">{displayName}</p>
+                <p className="text-center text-sm text-primary">{displayEmail}</p>
                 <button
                   onClick={handleLogout}
                   className="btn bg-primary text-white mt-3 w-fit mx-auto rounded-4xl"
@@ -141,7 +140,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <>
+            <div className="flex flex-col md:flex-row gap-2">
               <Link
                 to={"/login"}
                 className="btn bg-primary text-white hover:bg-secondary"
@@ -154,7 +153,7 @@ const Navbar = () => {
               >
                 Register
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

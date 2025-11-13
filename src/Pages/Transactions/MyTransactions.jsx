@@ -15,11 +15,11 @@ const MyTransactions = () => {
 
     setLoading(true); // start loading before fetch
 
-    let url = `http://localhost:3000/transactions?email=${user.email}`;
+    let url = `https://finease-server-c7jy.onrender.com/transactions?email=${user.email}`;
     if (sortType === "date") {
-      url = `http://localhost:3000/transactions-date-sorted?email=${user.email}`;
+      url = `https://finease-server-c7jy.onrender.com/transactions-date-sorted?email=${user.email}`;
     } else if (sortType === "amount") {
-      url = `http://localhost:3000/transactions-amount-sorted?email=${user.email}`;
+      url = `https://finease-server-c7jy.onrender.com/transactions-amount-sorted?email=${user.email}`;
     }
 
     fetch(url)
@@ -43,7 +43,7 @@ const MyTransactions = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/transactions/${_id}`, {
+        fetch(`https://finease-server-c7jy.onrender.com/transactions/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -72,8 +72,8 @@ const MyTransactions = () => {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between px-10 items-center">
-        <h2 className="text-3xl font-bold mb-4 text-primary">
+      <div className="flex justify-between md:px-10 items-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-primary">
           My Transactions: {transactions.length}
         </h2>
 

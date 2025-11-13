@@ -12,7 +12,7 @@ const TransactionDetails = () => {
   useEffect(() => {
     if (transaction && user?.email) {
       fetch(
-        `http://localhost:3000/transactions?email=${user.email}&category=${transaction.category}`
+        `https://finease-server-c7jy.onrender.com/transactions?email=${user.email}&category=${transaction.category}`
       )
         .then((res) => res.json())
         .then((data) => {

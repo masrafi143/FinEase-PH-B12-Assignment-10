@@ -9,7 +9,7 @@ const UpdateTransactions = () => {
 
   // Fetch transaction by ID
   useEffect(() => {
-    fetch(`http://localhost:3000/transactions/${id}`)
+    fetch(`https://finease-server-c7jy.onrender.com/transactions/${id}`)
       .then((res) => res.json())
       .then((data) => setTransaction(data))
       .catch((err) => console.error("Error loading transaction:", err));
@@ -28,7 +28,7 @@ const UpdateTransactions = () => {
       date: form.date.value,
     };
 
-    const res = await fetch(`http://localhost:3000/transactions/update/${id}`, {
+    const res = await fetch(`https://finease-server-c7jy.onrender.com/transactions/update/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedTransaction),

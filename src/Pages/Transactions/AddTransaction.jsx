@@ -28,7 +28,7 @@ const AddTransaction = () => {
       name,
     };
 
-    fetch("http://localhost:3000/transactions", {
+    fetch("https://finease-server-c7jy.onrender.com/transactions", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newTransaction),

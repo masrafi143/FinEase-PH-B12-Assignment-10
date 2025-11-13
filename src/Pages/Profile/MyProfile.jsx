@@ -16,7 +16,7 @@ const MyProfile = () => {
   // Fetch DB user info
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/users?email=${user.email}`)
+      fetch(`https://finease-server-c7jy.onrender.com/users?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setDbUser(data[0]);
@@ -44,7 +44,7 @@ const MyProfile = () => {
       email: dbUser.email,
     };
 
-    fetch(`http://localhost:3000/users/${dbUser._id}`, {
+    fetch(`https://finease-server-c7jy.onrender.com/users/${dbUser._id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedInfo),

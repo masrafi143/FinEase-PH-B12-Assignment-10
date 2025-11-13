@@ -21,7 +21,7 @@ const Login = () => {
   // ✅ Check if email already exists in DB
   const checkDuplicateEmail = async (email) => {
     try {
-      const res = await fetch(`http://localhost:3000/users?email=${email}`);
+      const res = await fetch(`https://finease-server-c7jy.onrender.com/users?email=${email}`);
       const data = await res.json();
       return data.length > 0; // true if exists
     } catch (err) {
@@ -85,7 +85,7 @@ const Login = () => {
 
         if (!exists) {
           // Save to DB only if new user
-          await fetch("http://localhost:3000/users", {
+          await fetch("https://finease-server-c7jy.onrender.com/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(googleUser),
@@ -106,7 +106,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center py-10 min-h-screen">
+    <div className="flex justify-center items-center min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
         <div className="card-body">
           <h2 className="font-bold text-center text-2xl mb-4">
