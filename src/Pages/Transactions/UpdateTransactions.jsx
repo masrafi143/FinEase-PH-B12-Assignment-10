@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
 
 const UpdateTransactions = () => {
   const { id } = useParams();
@@ -8,7 +9,7 @@ const UpdateTransactions = () => {
 
   // Fetch the transaction by ID
   useEffect(() => {
-    fetch(`http://localhost:3000/transactions/${id}`)
+    fetch(`https://finease-api-server.vercel.app/transactions/${id}`)
       .then((res) => res.json())
       .then((data) => setTransaction(data))
       .catch((err) => console.error("Error loading transaction:", err));
@@ -27,17 +28,17 @@ const UpdateTransactions = () => {
       date: form.date.value,
     };
 
-    const res = await fetch(`http://localhost:3000/transactions/update/${id}`, {
+    const res = await fetch(`https://finease-api-server.vercel.app/transactions/update/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedTransaction),
     });
 
     if (res.ok) {
-      alert("Transaction updated successfully!");
+      toast("Transaction updated successfully!");
       navigate(`/transactions/${id}`); // go back to details page
     } else {
-      alert("Failed to update transaction!");
+      toast("Failed to update transaction!");
     }
   };
 
@@ -132,6 +133,7 @@ const UpdateTransactions = () => {
           Update Transaction
         </button>
       </form>
+      <ToastContainer/>
     </div>
   );
 };

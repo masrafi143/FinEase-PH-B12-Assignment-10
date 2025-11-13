@@ -21,7 +21,7 @@ const Login = () => {
   // ✅ Check if email already exists in DB
   const checkDuplicateEmail = async (email) => {
     try {
-      const res = await fetch(`http://localhost:3000/users?email=${email}`);
+      const res = await fetch(`https://finease-api-server.vercel.app/users?email=${email}`);
       const data = await res.json();
       return data.length > 0; // true if exists
     } catch (err) {
@@ -65,7 +65,7 @@ const Login = () => {
     const email = emailRef.current.value;
     forgotPassword(email)
       .then(() => {
-        alert("📩 Please check your email to reset password.");
+        toast("📩 Please check your email to reset password.");
       })
       .catch((error) => setError(error.message));
   };
@@ -85,7 +85,7 @@ const Login = () => {
 
         if (!exists) {
           // Save to DB only if new user
-          await fetch("http://localhost:3000/users", {
+          await fetch("https://finease-api-server.vercel.app/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(googleUser),
@@ -135,7 +135,7 @@ const Login = () => {
               />
               <button
                 onClick={handleTogglePasswordShow}
-                className="btn btn-xs absolute top-2 right-4 md:right-6"
+                className="btn btn-xs absolute top-2 right-4 md:right-6 z-50"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>

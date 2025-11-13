@@ -1,5 +1,6 @@
 import React, { use, useState } from 'react';
 import { Link } from 'react-router';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Users = () => {
     const initialUsers = use(usersPromise);
@@ -13,7 +14,7 @@ const Users = () => {
 
         const newUser = {name, email};
         // save this user data to the database (via server)
-        fetch('http://localhost:3000/users', {
+        fetch('https://finease-api-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -27,21 +28,21 @@ const Users = () => {
                 newUser._id = data.insertedId;
                 const newUsers = [...users, newUser];
                 setUsers(newUsers);
-                alert('users added successfully');
+                toast('users added successfully');
                 e.target.reset();
             }
         })        
     }
     const handleDeleteUser = (id) => {
         console.log('delete user', id);
-        fetch(`http://localhost:3000/users/${id}`, {
+        fetch(`https://finease-api-server.vercel.app/users/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
         .then(data => {
             console.log('after delete', data);
             if(data.deletedCount){
-                alert('deleted successfully!');
+                toast('deleted successfully!');
                 const remainingUsers = users.filter(user => user._id !== id);
                 setUsers(remainingUsers);
             }
@@ -64,6 +65,7 @@ const Users = () => {
                     </p>)
                 }
             </div>
+            <ToastContainer/>
         </div>
     );
 };

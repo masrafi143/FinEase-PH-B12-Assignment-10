@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
       {
         path: 'transactions/:id',
         Component: TransactionDetails,
-        loader: ({ params }) => fetch(`http://localhost:3000/transactions/${params.id}`)
+        loader: ({ params }) => fetch(`https://finease-api-server.vercel.app/transactions/${params.id}`)
       },
       {
         path: 'transactions/update/:id',

@@ -29,7 +29,7 @@ const AddTransaction = () => {
     };
 
     // send to backend
-    fetch("http://localhost:3000/transactions", {
+    fetch("https://finease-api-server.vercel.app/transactions", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -40,7 +40,7 @@ const AddTransaction = () => {
       .then((data) => {
         if (data.insertedId) {
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "Transaction added successfully!",
             showConfirmButton: false,

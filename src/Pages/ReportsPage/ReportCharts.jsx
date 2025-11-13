@@ -33,7 +33,7 @@ const ReportCharts = () => {
 
   useEffect(() => {
     if (!user?.email) return;
-    fetch(`http://localhost:3000/transactions?email=${user.email}`)
+    fetch(`https://finease-api-server.vercel.app/transactions?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setTransactions(data);

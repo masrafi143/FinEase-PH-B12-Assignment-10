@@ -18,7 +18,7 @@ const Register = () => {
   // Check if email exists in DB
   const checkDuplicateEmail = async (email) => {
     try {
-      const res = await fetch(`http://localhost:3000/users?email=${email}`);
+      const res = await fetch(`https://finease-api-server.vercel.app/users?email=${email}`);
       const data = await res.json();
       return data.length > 0; // true if email exists
     } catch (err) {
@@ -56,7 +56,7 @@ const Register = () => {
     createUser(email, password)
       .then(() => {
         const newUser = { name, email, image: photo };
-        fetch("http://localhost:3000/users", {
+        fetch("https://finease-api-server.vercel.app/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newUser),
@@ -86,7 +86,7 @@ const Register = () => {
           return;
         }
 
-        fetch("http://localhost:3000/users", {
+        fetch("https://finease-api-server.vercel.app/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(googleUser),
@@ -146,7 +146,7 @@ const Register = () => {
               />
               <button
                 onClick={togglePassword}
-                className="btn btn-xs absolute top-2 right-4 md:right-6"
+                className="btn btn-xs absolute top-2 right-4 md:right-6 z-50"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
